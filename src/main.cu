@@ -26,7 +26,7 @@ void eval(const std::size_t N) {
 
   cublasLtMatmulDescCreate(&op_desc, CUBLAS_COMPUTE_32F, CUDA_R_32F);
   cublasLtMatmulDescSetAttribute(op_desc, CUBLASLT_MATMUL_DESC_TRANSA, &trans_a, sizeof(trans_a));
-  cublasLtMatmulDescSetAttribute(op_desc, CUBLASLT_MATMUL_DESC_TRANSA, &trans_b, sizeof(trans_b));
+  cublasLtMatmulDescSetAttribute(op_desc, CUBLASLT_MATMUL_DESC_TRANSB, &trans_b, sizeof(trans_b));
 
   cublasLtMatrixLayoutCreate(&desc_a, CUDA_R_32F, N, N, N);
   cublasLtMatrixLayoutCreate(&desc_b, CUDA_R_32F, N, N, N);
@@ -63,6 +63,8 @@ void eval(const std::size_t N) {
   cublasLtMatrixLayoutDestroy(desc_b);
   cublasLtMatrixLayoutDestroy(desc_c);
   cublasLtMatmulDescDestroy(op_desc);
+
+  cublasLtDestroy(handle);
 
   cudaFree(workspace);
   cudaFree(dev_a);
