@@ -1,7 +1,7 @@
 NVCC=nvcc
 NVCCFLAGS=-std=c++17 -Xcompiler="-Wall -fopenmp"
 NVCCFLAGS+=-gencode arch=compute_80,code=sm_80
-NVCCFLAGS+=-lcublasLt
+NVCCFLAGS+=-lcublasLt -lcublas
 
 TARGET=cublaslt.test
 
